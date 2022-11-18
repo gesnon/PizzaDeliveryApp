@@ -1,4 +1,6 @@
-﻿using PizzaDeliveryServices.DTO.Order;
+﻿using PizzaDeliveryDB.Entities;
+using PizzaDeliveryServices.DTO.ItemDTO;
+using PizzaDeliveryServices.DTO.Order;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +11,10 @@ namespace PizzaDeliveryServices.Services
 {
     public interface IOrderService
     {
-        public void CreateOrder(OrderCreateDTO DTO);
+        public void CreateOrder(List<ItemDTO> DTO);
         public void UpdateOrder(OrderUpdateDTO DTO);
         public void DeleteOrder(int Id);
-        public List<OrderGetDTO> GetOrderHistory(int ClientID);
+        public List<OrderHistoryGetDTO> GetOrderHistory(int ClientID);
+
     }
 }

@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace PizzaDeliveryServices.DTO.Order
 {
-    public class OrderCreateDTO
+    public class OrderHistoryGetDTO
     {
-        public int ClientID { get; set; }        
+        public int Id { get; set; }
+        public int ClientID { get; set; }
+        public decimal Price { get; set; }
         public DateTime Date { get; set; }
-        public List<int> PizzaOrders { get; set; }
     }
 }

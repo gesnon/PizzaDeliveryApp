@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using PizzaDeliveryDB.Entities;
+using PizzaDeliveryServices.DTO.Accounts;
 using PizzaDeliveryServices.DTO.CharacteristicDTO;
 using PizzaDeliveryServices.DTO.IngredientDTO;
+using PizzaDeliveryServices.DTO.ItemDTO;
 using PizzaDeliveryServices.DTO.Order;
 using PizzaDeliveryServices.DTO.PizzaBaseDTO;
 using PizzaDeliveryServices.DTO.PizzaDTO;
@@ -67,16 +69,11 @@ namespace PizzaDeliveryServices.Mapper
             .ForMember(_ => _.OrderId, opt => opt.MapFrom(i => i.OrderId))
             .ForMember(_ => _.PizzaID, opt => opt.MapFrom(i => i.PizzaID));
 
+
             this.CreateMap<PizzaOrderUpdateDTO, PizzaOrder>()
             .ForMember(_ => _.Id, opt => opt.MapFrom(i => i.Id))
             .ForMember(_ => _.OrderId, opt => opt.MapFrom(i => i.OrderId))
             .ForMember(_ => _.PizzaID, opt => opt.MapFrom(i => i.PizzaID));
-
-            this.CreateMap<OrderCreateDTO, Order>()
-            .ForMember(_ => _.ClientID, opt => opt.MapFrom(i => i.ClientID))
-            .ForMember(_ => _.Date, opt => opt.MapFrom(i => i.Date))
-            .ForMember(_ => _.PizzaOrders, opt => opt
-            .MapFrom(i => i.PizzaOrders.Select(_ => new PizzaOrder {PizzaID=_})));
 
             this.CreateMap<OrderUpdateDTO, Order>()
             .ForMember(_ => _.Id, opt => opt.MapFrom(i => i.Id))
@@ -85,13 +82,36 @@ namespace PizzaDeliveryServices.Mapper
             .ForMember(_ => _.PizzaOrders, opt => opt
             .MapFrom(i => i.PizzaOrders.Select(_ => new PizzaOrder { PizzaID = _ })));
 
-            this.CreateMap<Order,OrderGetDTO>()
+            this.CreateMap<Order, OrderHistoryGetDTO>()
             .ForMember(_ => _.Id, opt => opt.MapFrom(i => i.Id))
             .ForMember(_ => _.ClientID, opt => opt.MapFrom(i => i.ClientID))
             .ForMember(_ => _.Date, opt => opt.MapFrom(i => i.Date))
-            .ForMember(_ => _.Price, opt => opt.MapFrom(i => i.Price))
-            .ForMember(_ => _.PizzaOrdersDTO, opt => opt
-            .MapFrom(i => i.PizzaOrders.Select(_ => new PizzaOrderGetDTO { })));
+            .ForMember(_ => _.Price, opt => opt.MapFrom(i => i.Price));
+
+
+            CreateMap<Account, AccountResponse>();
+
+            CreateMap<Account, AuthenticateResponse>();
+
+            CreateMap<RegisterRequest, Account>();
+
+            CreateMap<CreateRequest, Account>();
+
+            CreateMap<UpdateRequest, Account>()
+                .ForAllMembers(x => x.Condition(
+                    (src, dest, prop) =>
+                    {
+                    // ignore null & empty string properties
+                    if (prop == null) return false;
+                        if (prop.GetType() == typeof(string) && string.IsNullOrEmpty((string)prop)) return false;
+
+                    // ignore null role
+                    if (x.DestinationMember.Name == "Role" && src.Role == null) return false;
+
+                        return true;
+                    }
+                ));
+
         }
 
     }

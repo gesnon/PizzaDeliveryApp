@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using PizzaDeliveryDB;
 using PizzaDeliveryDB.Entities;
+using PizzaDeliveryServices.DTO.ItemDTO;
 using PizzaDeliveryServices.DTO.Order;
 using System;
 using System.Collections.Generic;
@@ -13,17 +15,22 @@ namespace PizzaDeliveryServices.Services
     public class OrderService : IOrderService
     {
         private readonly ContextDB context;
-        private readonly IMapper mapper;
+        private readonly IMapper mapper;       
+        private readonly Account account;
 
-        public OrderService(ContextDB context, IMapper mapper)
+        public OrderService(ContextDB context, IMapper mapper, IHttpContextAccessor httpContextAccessor)
         {
             this.context = context;
             this.mapper = mapper;
+            this.account = (Account)httpContextAccessor.HttpContext.Items["User"];
         }
 
-        public void CreateOrder(OrderCreateDTO DTO)
-        {
-            Order order = mapper.Map<Order>(DTO);
+        public void CreateOrder(List<ItemDTO> DTO)
+        {            
+            Order order = new Order { Date=DateTime.Now, ClientID=account.Id };
+            order.PizzaOrders=DTO.Select(_=> new PizzaOrder { OrderId=order.Id, Pizza= new Pizza 
+            { PizzaBaseID=_.ItemID, Characteristic= context.Characteristics.FirstOrDefault(c=>c.Size==_.ItemSize)} }).ToList();            
+            order.Price = order.PizzaOrders.Sum(_ => _.Pizza.Characteristic.Price);            
             context.Orders.Add(order);
             context.SaveChanges();
         }
@@ -50,11 +57,20 @@ namespace PizzaDeliveryServices.Services
             context.SaveChanges();
         }
 
-        public List<OrderGetDTO> GetOrderHistory(int ClientID)
+        public List<OrderHistoryGetDTO> GetOrderHistory(int ClientID)
         {
+            Account client = context.Accounts.FirstOrDefault(_ => _.Id == ClientID);
+
+            if (client == null)
+            {
+                throw new NotFoundExeption("Клиент не найден");
+            }
+            
             List<Order> orders = context.Orders.Where(_ => _.ClientID==ClientID).ToList();
 
+            List<OrderHistoryGetDTO> result = orders.Select(_ => mapper.Map<OrderHistoryGetDTO>(_)).ToList();
 
+            return result;
         }
     }
 }

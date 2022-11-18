@@ -2,7 +2,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using PizzaDeliveryApp.CustomExceptionMiddleware;
 using PizzaDeliveryDB;
+using PizzaDeliveryServices.AppSetting;
+using PizzaDeliveryServices.Authorization;
 using PizzaDeliveryServices.Services;
+using System.Text.Json.Serialization;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,9 +21,27 @@ builder.Services.AddSwaggerGen(c =>
 
 });
 builder.Services.AddDbContext<ContextDB>(options => options.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=PizzaDeliveryDB;Trusted_Connection=true"));
+builder.Services.AddCors();
+builder.Services.AddControllers().AddJsonOptions(x =>
+{
+    // serialize enums as strings in api responses (e.g. Role)
+    x.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+});
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+builder.Services.Configure<AppSettings>(builder.Configuration.GetSection("AppSettings"));
+builder.Services.AddScoped<IJwtUtils, JwtUtils>();
+builder.Services.AddScoped<IAccountService, AccountService>();
+
 
 builder.Services.AddTransient<IIngredientService, IngredientService>();
+builder.Services.AddTransient<IAccountService, AccountService>();
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var dataContext = scope.ServiceProvider.GetRequiredService<ContextDB>();
+    dataContext.Database.Migrate();
+}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -30,7 +52,15 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseCors(x => x
+        .SetIsOriginAllowed(origin => true)
+        .AllowAnyMethod()
+        .AllowAnyHeader()
+        .AllowCredentials());
+
 app.UseMiddleware<ExceptionMiddleware>();
+
+app.UseMiddleware<JwtMiddleware>();
 
 app.UseAuthorization();
 
