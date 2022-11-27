@@ -59,6 +59,10 @@ namespace PizzaDeliveryServices.Services
 
         public List<OrderHistoryGetDTO> GetOrderHistory(int ClientID)
         {
+            if (account.Role != Role.Admin)
+            {
+                ClientID = account.Id;
+            }
             Account client = context.Accounts.FirstOrDefault(_ => _.Id == ClientID);
 
             if (client == null)
