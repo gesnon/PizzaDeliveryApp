@@ -9,7 +9,7 @@ namespace PizzaDeliveryApp.Controllers
     [Authorize]
     [ApiController]
     [Route("[controller]")]
-    public class OrderController
+    public class OrderController: BaseController
     {
         private readonly IOrderService orderService;
 
@@ -18,19 +18,21 @@ namespace PizzaDeliveryApp.Controllers
             this.orderService = orderService;
         }
 
-        [HttpPost("CreateOrder")]
-        public void CreateOrder([FromBody]List<ItemDTO> DTO)
+        [HttpPost("Create")]
+        public ActionResult CreateOrder([FromBody]List<ItemDTO> DTO)
         {
             orderService.CreateOrder(DTO);
+
+            return Ok();
         }
 
-        [HttpDelete("DeleteOrder/{Id}")]
+        [HttpDelete("Delete/{Id}")]
         public void DeleteOrder(int Id)
         {
             orderService.DeleteOrder(Id);
         }
 
-        [HttpGet("GetOrderHistory/{ClientID}")]        
+        [HttpGet("History/{ClientID}")]        
         public List<OrderHistoryGetDTO> GetOrderHistory(int ClientID)
         {
             return orderService.GetOrderHistory(ClientID);

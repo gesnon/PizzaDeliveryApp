@@ -1,4 +1,5 @@
-﻿using PizzaDeliveryServices.DTO.PizzaIngredient;
+﻿using PizzaDeliveryDB.Entities;
+using PizzaDeliveryServices.DTO.PizzaIngredient;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,5 +11,7 @@ namespace PizzaDeliveryServices.Services
     public interface IPizzaIngredientService
     {
         public void CreatePizzaIngredient(PizzaIngredientCreateDTO DTO); // не нужен
+
+        
     }
 }

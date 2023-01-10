@@ -67,7 +67,15 @@ namespace PizzaDeliveryServices.Services
 
             return list;
         }
-
+        public Ingredient GetIngredient(int id)
+        {
+            Ingredient result = context.Ingredients.FirstOrDefault(_ => _.Id == id);
+            if (result == null)
+            {
+                throw new NotFiniteNumberException("Ингридиент не найден");
+            }
+            return result;
+        }
 
     }
 }

@@ -5,9 +5,11 @@ VisualStudioVersion = 17.1.32210.238
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PizzaDeliveryApp", "PizzaDeliveryApp\PizzaDeliveryApp.csproj", "{6430FA91-5E8B-48AF-A3FA-239380D9679A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PizzaDeliveryDB", "PizzaDeliveryDB\PizzaDeliveryDB.csproj", "{759B4668-C8DD-41A2-B91C-51256CB76F60}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PizzaDeliveryDB", "PizzaDeliveryDB\PizzaDeliveryDB.csproj", "{759B4668-C8DD-41A2-B91C-51256CB76F60}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PizzaDeliveryServices", "PizzaDeliveryServices\PizzaDeliveryServices.csproj", "{C675D818-A86F-4E9D-9B1F-BEA3AE1030F9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PizzaDeliveryServices", "PizzaDeliveryServices\PizzaDeliveryServices.csproj", "{C675D818-A86F-4E9D-9B1F-BEA3AE1030F9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PizzaDeliveryTest", "PizzaDeliveryTest\PizzaDeliveryTest.csproj", "{F6C112EA-9C5C-4D26-AEB4-4AA29173DD10}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{C675D818-A86F-4E9D-9B1F-BEA3AE1030F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C675D818-A86F-4E9D-9B1F-BEA3AE1030F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C675D818-A86F-4E9D-9B1F-BEA3AE1030F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6C112EA-9C5C-4D26-AEB4-4AA29173DD10}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6C112EA-9C5C-4D26-AEB4-4AA29173DD10}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6C112EA-9C5C-4D26-AEB4-4AA29173DD10}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6C112EA-9C5C-4D26-AEB4-4AA29173DD10}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

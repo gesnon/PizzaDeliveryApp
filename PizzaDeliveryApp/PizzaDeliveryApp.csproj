@@ -17,4 +17,8 @@
     <ProjectReference Include="..\PizzaDeliveryServices\PizzaDeliveryServices.csproj" />
   </ItemGroup>
 
+	<ItemGroup>
+		<InternalsVisibleTo Include="PizzaDeliveryTest" />
+	</ItemGroup>
+
 </Project>
