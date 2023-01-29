@@ -11,8 +11,6 @@ namespace PizzaDeliveryDB.Entities
         public int Id { get; set; }
         public PizzaBase PizzaBase { get; set; }
         public int PizzaBaseID { get; set; }
-        public Characteristic Characteristic { get; set; }
-        public int CharacteristicID { get; set; }
-
+        public PizzaCharacteristic PizzaCharacteristic { get; set; }
     }
 }

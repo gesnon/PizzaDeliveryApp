@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PizzaDeliveryDB.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,8 @@ namespace PizzaDeliveryServices.DTO.PizzaOrderDTO
 {
     public class PizzaOrderCreateDTO
     {
-        public int PizzaID { get; set; }
+        public int PizzaBazeID { get; set; }
+        public Size Size { get; set; }
         public int OrderId { get; set; }
     }
 }

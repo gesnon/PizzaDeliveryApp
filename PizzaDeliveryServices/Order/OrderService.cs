@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using PizzaDeliveryDB;
 using PizzaDeliveryDB.Entities;
 using PizzaDeliveryServices.DTO.ItemDTO;
@@ -27,14 +28,17 @@ namespace PizzaDeliveryServices.Services
 
         public void CreateOrder(List<ItemDTO> DTO)
         {
+            var pizzas = DTO.Select(_ => context.Pizzas.Include(_=>_.PizzaCharacteristic)
+            .Where(p => p.Id == _.ItemID && p.PizzaCharacteristic.Size==_.ItemSize)
+            .Select(_=>  new {id = _.Id, price = _.PizzaCharacteristic.Price }).First()).ToList(); 
+            
             Order order = new Order { Date = DateTime.Now, ClientID = account.Id };
-            order.PizzaOrders = DTO.Select(_ => new PizzaOrder
-            {
-                OrderId = order.Id,
-                Pizza = new Pizza
-                { PizzaBaseID = _.ItemID, Characteristic = context.Characteristics.FirstOrDefault(c => c.Size == _.ItemSize) }
+            order.PizzaOrders = pizzas.Select(_ => new PizzaOrder
+            {                
+                PizzaID = _.id               
             }).ToList();
-            order.Price = order.PizzaOrders.Sum(_ => _.Pizza.Characteristic.Price);
+
+            order.Price = pizzas.Sum(_ => _.price);
             context.Orders.Add(order);
             context.SaveChanges();
         }

@@ -23,8 +23,7 @@ namespace PizzaDeliveryServices.Services
         public void CreatePizza(PizzaCreateDTO DTO)
         {
             Pizza pizza = mapper.Map<Pizza>(DTO);
-            pizza.Characteristic = context.Characteristics.FirstOrDefault(_ => _.Size == (Size)DTO.Size);
-
+            
             context.Pizzas.Add(pizza);
             context.SaveChanges();
         }

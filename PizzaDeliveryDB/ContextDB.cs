@@ -12,7 +12,6 @@ namespace PizzaDeliveryDB
     {
         public DbSet<Account> Accounts { get; set; }
         public DbSet<Ingredient> Ingredients { get; set; }
-        public DbSet<Characteristic> Characteristics { get; set; }
         public DbSet<Order> Orders { get; set; }        
         public DbSet<Pizza> Pizzas { get; set; }
         public DbSet<PizzaBase> pizzaBases { get; set; }

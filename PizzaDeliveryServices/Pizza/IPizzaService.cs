@@ -10,7 +10,6 @@ namespace PizzaDeliveryServices.Services
     public interface IPizzaService
     {
         public void CreatePizza(PizzaCreateDTO DTO);
-
         public void UpdatePizza(PizzaUpdateDTO DTO);
         public void DeletePizza(int Id);
     }

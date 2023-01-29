@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace PizzaDeliveryDB.Entities
 {
-    public class Characteristic
+    public class PizzaCharacteristic
     {
         public int Id { get; set; }
-        public decimal Price { get; set; }
-        public int Diameter { get; set; }
-        public int Weight { get; set; }
         public Size Size { get; set; }
+        public int Diameter { get; set; }
+        public int Weight { get; set; }    
+        public Decimal Price { get; set; }
     }
 }
