@@ -31,10 +31,14 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.Configure<AppSettings>(builder.Configuration.GetSection("AppSettings"));
 builder.Services.AddScoped<IJwtUtils, JwtUtils>();
 builder.Services.AddScoped<IAccountService, AccountService>();
-
+builder.Services.AddAuthentication();
 
 builder.Services.AddTransient<IIngredientService, IngredientService>();
 builder.Services.AddTransient<IAccountService, AccountService>();
+builder.Services.AddTransient<IPizzaBaseService, PizzaBaseService>();
+builder.Services.AddTransient<IPizzaCharacteristicService, PizzaCharacteristicService>();
+builder.Services.AddTransient<IPizzaService, PizzaService>();
+
 var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())
@@ -60,9 +64,9 @@ app.UseCors(x => x
 
 app.UseMiddleware<ExceptionMiddleware>();
 
-app.UseMiddleware<JwtMiddleware>();
+//app.UseMiddleware<JwtMiddleware>();
 
-app.UseAuthorization();
+//app.UseAuthorization();
 
 app.MapControllers();
 

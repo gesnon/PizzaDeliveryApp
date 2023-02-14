@@ -23,9 +23,9 @@ namespace PizzaDeliveryTest.IngredientTest
 
                 IngredientCreateDTO testIngredient = new IngredientCreateDTO { Name = "Сыр" };
 
-                int ID = IngredientService.CreateIngredient(testIngredient);
+                int ID = IngredientService.Create(testIngredient);
 
-                Ingredient ingredient = IngredientService.GetIngredient(ID);
+                Ingredient ingredient = IngredientService.Get(ID);
 
                 ingredient.Id.Should().Be(ID);
                 ingredient.Name.Should().Be(testIngredient.Name);

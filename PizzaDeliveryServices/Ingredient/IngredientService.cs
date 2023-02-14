@@ -1,13 +1,8 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
 using PizzaDeliveryDB;
 using PizzaDeliveryDB.Entities;
 using PizzaDeliveryServices.DTO.IngredientDTO;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace PizzaDeliveryServices.Services
 {
@@ -21,7 +16,7 @@ namespace PizzaDeliveryServices.Services
             this.context = context;
             this.mapper = mapper;
         }
-        public int CreateIngredient(IngredientCreateDTO DTO)
+        public int Create(IngredientCreateDTO DTO)
         {
             Ingredient ingredient = mapper.Map<Ingredient>(DTO);
 
@@ -32,7 +27,7 @@ namespace PizzaDeliveryServices.Services
             return ingredient.Id;
         }
 
-        public void UpdateIngredient(IngredientUpdateDTO DTO)
+        public void Update(IngredientUpdateDTO DTO)
         {
             Ingredient ingredient = context.Ingredients.FirstOrDefault(_ => _.Id == DTO.Id);
 
@@ -43,7 +38,7 @@ namespace PizzaDeliveryServices.Services
             ingredient.Name = DTO.Name;
             context.SaveChanges();
         }
-        public void DeleteIngredient(int Id)
+        public void Delete(int Id)
         {
             Ingredient ingredient = context.Ingredients.FirstOrDefault(_ => _.Id == Id);
 
@@ -67,7 +62,7 @@ namespace PizzaDeliveryServices.Services
 
             return list;
         }
-        public Ingredient GetIngredient(int id)
+        public Ingredient Get(int id)
         {
             Ingredient result = context.Ingredients.FirstOrDefault(_ => _.Id == id);
             if (result == null)

@@ -11,10 +11,10 @@ namespace PizzaDeliveryServices.Services
 {
     public interface IIngredientService
     {
-        public int CreateIngredient(IngredientCreateDTO DTO);
-        public void UpdateIngredient(IngredientUpdateDTO DTO);
-        public void DeleteIngredient(int Id);
-        public Ingredient GetIngredient(int id);
+        public int Create(IngredientCreateDTO DTO);
+        public void Update(IngredientUpdateDTO DTO);
+        public void Delete(int Id);
+        public Ingredient Get(int id);
         public List<IngredientGetDTO> GetIngredientByName(string Name);
     }
 }

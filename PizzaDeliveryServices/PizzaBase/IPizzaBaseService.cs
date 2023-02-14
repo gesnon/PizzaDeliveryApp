@@ -9,10 +9,10 @@ namespace PizzaDeliveryServices.Services
 {
     public interface IPizzaBaseService
     {
-        public void CreatePizzaBase(PizzaBaseCreateDTO DTO);
+        public int Create(PizzaBaseCreateDTO DTO);
 
-        public void UpdatePizzaBase(PizzaBaseUpdateDTO DTO);
+        public void Update(PizzaBaseUpdateDTO DTO);
 
-        public void DeletePizzaBase(int Id);
+        public void Delete(int Id);
     }
 }

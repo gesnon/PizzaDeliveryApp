@@ -32,7 +32,7 @@ namespace PizzaDeliveryServices.Mapper
             .ForMember(_ => _.Name, opt => opt.MapFrom(i => i.Name))
             .ForMember(_ => _.Description, opt => opt.MapFrom(i => i.Description))
             .ForMember(_ => _.PizzaIngredients, opt => opt
-            .MapFrom(i => i.Ingredients.Select(_ => new PizzaIngredient { IngredientID = _ })));
+            .MapFrom(i => i.PizzaIngredients.Select(_ => new PizzaIngredient { IngredientID = _ })));
 
             this.CreateMap<PizzaBaseUpdateDTO, PizzaBase>()
             .ForMember(_ => _.Name, opt => opt.MapFrom(i => i.Name))
@@ -45,29 +45,18 @@ namespace PizzaDeliveryServices.Mapper
             .ForMember(_ => _.IngredientID, opt => opt.MapFrom(i => i.IngredientID))
             .ForMember(_ => _.PizzaBaseID, opt => opt.MapFrom(i => i.PizzaBaseID));
 
-            this.CreateMap<CharacteristicCreateDTO, Characteristic>()
-            .ForMember(_ => _.Diameter, opt => opt.MapFrom(i => i.Diameter))
-            .ForMember(_ => _.Price, opt => opt.MapFrom(i => i.Price))
-            .ForMember(_ => _.Weight, opt => opt.MapFrom(i => i.Weight))
-            .ForMember(_ => _.Size, opt => opt.MapFrom(i => i.Size));
-
-            this.CreateMap<CharacteristicUpdateDTO, Characteristic>()
-            .ForMember(_ => _.Id, opt => opt.MapFrom(i => i.Id))
-            .ForMember(_ => _.Diameter, opt => opt.MapFrom(i => i.Diameter))
-            .ForMember(_ => _.Price, opt => opt.MapFrom(i => i.Price))
-            .ForMember(_ => _.Weight, opt => opt.MapFrom(i => i.Weight))
-            .ForMember(_ => _.Size, opt => opt.MapFrom(i => i.Size));
-
             this.CreateMap<PizzaCreateDTO, Pizza>()
-            .ForMember(_ => _.PizzaBaseID, opt => opt.MapFrom(i => i.PizzaBaseID));
+            .ForMember(_ => _.PizzaBaseID, opt => opt.MapFrom(i => i.PizzaBaseID))
+            .ForMember(_ => _.PizzaCharacteristic, opt => opt.MapFrom(i => i.pizzaCharacteristic));
 
             this.CreateMap<PizzaUpdateDTO, Pizza>()
             .ForMember(_ => _.PizzaBaseID, opt => opt.MapFrom(i => i.PizzaBaseID))
-            .ForMember(_ => _.Id, opt => opt.MapFrom(i => i.Id));
+            .ForMember(_ => _.Id, opt => opt.MapFrom(i => i.Id))
+            .ForMember(_ => _.PizzaCharacteristic, opt => opt.MapFrom(i => i.pizzaCharacteristic));
 
             this.CreateMap<PizzaOrderCreateDTO, PizzaOrder>()
-            .ForMember(_ => _.OrderId, opt => opt.MapFrom(i => i.OrderId))
-            .ForMember(_ => _.PizzaID, opt => opt.MapFrom(i => i.PizzaID));
+            .ForMember(_ => _.OrderId, opt => opt.MapFrom(i => i.OrderId));
+           // .ForMember(_ => _.PizzaID, opt => opt.MapFrom(i => i.PizzaID));
 
 
             this.CreateMap<PizzaOrderUpdateDTO, PizzaOrder>()
@@ -87,6 +76,19 @@ namespace PizzaDeliveryServices.Mapper
             .ForMember(_ => _.ClientID, opt => opt.MapFrom(i => i.ClientID))
             .ForMember(_ => _.Date, opt => opt.MapFrom(i => i.Date))
             .ForMember(_ => _.Price, opt => opt.MapFrom(i => i.Price));
+
+            this.CreateMap<PizzaCharacteristicDTO, PizzaCharacteristic>()
+            .ForMember(_ => _.Id, opt => opt.MapFrom(i => i.Id))
+            .ForMember(_ => _.Diameter, opt => opt.MapFrom(i => i.Diameter))
+            .ForMember(_ => _.Price, opt => opt.MapFrom(i => i.Price))
+            .ForMember(_ => _.Weight, opt => opt.MapFrom(i => i.Weight))
+            .ForMember(_ => _.Size, opt => opt.MapFrom(i => i.Size));
+            
+            this.CreateMap<CreatePizzaCharacteristicDTO, PizzaCharacteristic>()            
+            .ForMember(_ => _.Diameter, opt => opt.MapFrom(i => i.Diameter))
+            .ForMember(_ => _.Price, opt => opt.MapFrom(i => i.Price))
+            .ForMember(_ => _.Weight, opt => opt.MapFrom(i => i.Weight))
+            .ForMember(_ => _.Size, opt => opt.MapFrom(i => i.Size));
 
 
             CreateMap<Account, AccountResponse>();

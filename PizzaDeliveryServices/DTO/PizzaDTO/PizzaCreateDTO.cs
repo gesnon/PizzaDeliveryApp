@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PizzaDeliveryServices.DTO.CharacteristicDTO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,6 +10,6 @@ namespace PizzaDeliveryServices.DTO.PizzaDTO
     public class PizzaCreateDTO
     {
         public int PizzaBaseID { get; set; }
-        public int Size { get; set; }
+        public CreatePizzaCharacteristicDTO pizzaCharacteristic { get; set; }
     }
 }

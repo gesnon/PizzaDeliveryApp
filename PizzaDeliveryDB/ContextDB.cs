@@ -18,6 +18,7 @@ namespace PizzaDeliveryDB
         public DbSet<PizzaIngredient> PizzaIngredients { get; set; }
         public DbSet<PizzaOrder> PizzaOrders { get; set; }
         public DbSet<PizzaBase> PizzaTemplates { get; set; }
+        public DbSet<PizzaCharacteristic> PizzaCharacteristic { get; set; }
         public DbSet<RefreshToken> RefreshTokens { get; set; }
         public ContextDB(DbContextOptions options) : base(options)
         {

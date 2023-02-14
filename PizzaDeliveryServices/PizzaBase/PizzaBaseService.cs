@@ -21,15 +21,16 @@ namespace PizzaDeliveryServices.Services
             this.mapper = mapper;
         }
 
-        public void CreatePizzaBase(PizzaBaseCreateDTO DTO)
+        public int Create(PizzaBaseCreateDTO DTO)
         {
             PizzaBase pizzaBase = mapper.Map<PizzaBase>(DTO);
 
             context.pizzaBases.Add(pizzaBase);
             context.SaveChanges();
+            return pizzaBase.Id;
         }
 
-        public void UpdatePizzaBase(PizzaBaseUpdateDTO DTO)
+        public void Update(PizzaBaseUpdateDTO DTO)
         {
             PizzaBase pizzaBase = context.pizzaBases.FirstOrDefault(_ => _.Id == DTO.Id);
             if (pizzaBase == null)
@@ -41,7 +42,7 @@ namespace PizzaDeliveryServices.Services
             context.SaveChanges();
         }
 
-        public void DeletePizzaBase(int Id)
+        public void Delete(int Id)
         {
             PizzaBase pizzaBase = context.pizzaBases.FirstOrDefault(_ => _.Id ==Id);
             if (pizzaBase == null)

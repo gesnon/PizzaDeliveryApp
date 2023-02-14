@@ -20,27 +20,28 @@ namespace PizzaDeliveryServices.Services
             this.context = context;
             this.mapper = mapper;
         }
-        public void CreatePizza(PizzaCreateDTO DTO)
+        public int Create(PizzaCreateDTO DTO)
         {
             Pizza pizza = mapper.Map<Pizza>(DTO);
             
             context.Pizzas.Add(pizza);
             context.SaveChanges();
+
+            return pizza.Id;
         }
-        public void UpdatePizza(PizzaUpdateDTO DTO)
+        public void Update(PizzaUpdateDTO DTO)
         {
             Pizza pizza = context.Pizzas.FirstOrDefault(_ => _.Id == DTO.Id);
             if (pizza == null)
             {
                 throw new NotFoundExeption("Пицца не найдена");
             }
-            pizza = mapper.Map<Pizza>(DTO);
-            pizza.Characteristic = context.Characteristics.FirstOrDefault(_ => _.Size == (Size)DTO.Size);
+            pizza = mapper.Map<Pizza>(DTO);            
 
             context.SaveChanges();
         }
 
-        public void DeletePizza(int Id)
+        public void Delete(int Id)
         {
             Pizza pizza = context.Pizzas.FirstOrDefault(_ => _.Id == Id);
             if (pizza == null)

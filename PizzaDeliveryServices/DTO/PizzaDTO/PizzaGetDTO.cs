@@ -11,6 +11,6 @@ namespace PizzaDeliveryServices.DTO.PizzaDTO
     public class PizzaGetDTO
     {
         public PizzaBaseGetDTO PizzaBaseDTO { get; set; }
-        public CharacteristicGetDTO CharacteristicDTO { get; set; }
+        public PizzaCharacteristicDTO PizzaCharacteristicDTO { get; set; }
     }
 }

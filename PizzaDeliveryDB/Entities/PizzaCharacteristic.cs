@@ -12,6 +12,6 @@ namespace PizzaDeliveryDB.Entities
         public Size Size { get; set; }
         public int Diameter { get; set; }
         public int Weight { get; set; }    
-        public Decimal Price { get; set; }
+        public decimal Price { get; set; }
     }
 }
