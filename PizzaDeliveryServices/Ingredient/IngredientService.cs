@@ -26,7 +26,6 @@ namespace PizzaDeliveryServices.Services
 
             return ingredient.Id;
         }
-
         public void Update(IngredientUpdateDTO DTO)
         {
             Ingredient ingredient = context.Ingredients.FirstOrDefault(_ => _.Id == DTO.Id);
@@ -38,7 +37,7 @@ namespace PizzaDeliveryServices.Services
             ingredient.Name = DTO.Name;
             context.SaveChanges();
         }
-        public void Delete(int Id)
+        public int Delete(int Id)
         {
             Ingredient ingredient = context.Ingredients.FirstOrDefault(_ => _.Id == Id);
 
@@ -48,8 +47,9 @@ namespace PizzaDeliveryServices.Services
             }
             context.Ingredients.Remove(ingredient);
             context.SaveChanges();
+            return ingredient.Id;
         }
-        public List<IngredientGetDTO> GetIngredientByName(string Name)
+        public List<IngredientGetDTO> GetByName(string Name)
         {
             var query = context.Ingredients.AsQueryable();
 

@@ -38,6 +38,7 @@ builder.Services.AddTransient<IAccountService, AccountService>();
 builder.Services.AddTransient<IPizzaBaseService, PizzaBaseService>();
 builder.Services.AddTransient<IPizzaCharacteristicService, PizzaCharacteristicService>();
 builder.Services.AddTransient<IPizzaService, PizzaService>();
+builder.Services.AddTransient<IPizzaIngredientService, PizzaIngredientService>();
 
 var app = builder.Build();
 

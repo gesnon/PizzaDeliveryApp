@@ -10,8 +10,9 @@ namespace PizzaDeliveryServices.Services
 {
     public interface IPizzaIngredientService
     {
-        public void CreatePizzaIngredient(PizzaIngredientCreateDTO DTO); // не нужен
+        public void CreatePizzaIngredient(PizzaIngredientCreateDTO DTO);
 
+        public void GreateAllPizzaIngredients(int PizzaId, List<int> Ingredients);
         
     }
 }

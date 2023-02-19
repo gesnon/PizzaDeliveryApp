@@ -21,5 +21,29 @@ namespace PizzaDeliveryApp.Controllers
         {
             return Ok(pizzaBaseService.Create(DTO));
         }
+        [HttpGet]
+        public ActionResult Get(int Id)
+        {
+            return Ok(pizzaBaseService.Get(Id));
+        }
+
+        [HttpGet("GetDTO")]
+        public ActionResult GetDTO(int Id)
+        {
+            return Ok(pizzaBaseService.GetDTO(Id));
+        }
+
+        [HttpPut]
+        public ActionResult Update ([FromBody] PizzaBaseUpdateDTO DTO)
+        {
+            pizzaBaseService.Update(DTO);
+            return Ok();
+        }    
+        
+        [HttpDelete]
+        public ActionResult Delete (int Id)
+        {
+            return Ok(pizzaBaseService.Delete(Id));
+        }
     }
 }

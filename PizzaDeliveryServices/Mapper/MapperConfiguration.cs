@@ -34,6 +34,12 @@ namespace PizzaDeliveryServices.Mapper
             .ForMember(_ => _.PizzaIngredients, opt => opt
             .MapFrom(i => i.PizzaIngredients.Select(_ => new PizzaIngredient { IngredientID = _ })));
 
+            this.CreateMap<PizzaBase, PizzaBaseGetDTO>()
+            .ForMember(_ => _.Name, opt => opt.MapFrom(i => i.Name))
+            .ForMember(_ => _.Description, opt => opt.MapFrom(i => i.Description))
+            .ForMember(_ => _.pizzaIngredientsDTO, opt => opt
+            .MapFrom(i => i.PizzaIngredients.Select(_ => new PizzaIngredientGetDTO { IngredientId = _.IngredientID, PizzaBaseId=_.PizzaBaseID })));
+
             this.CreateMap<PizzaBaseUpdateDTO, PizzaBase>()
             .ForMember(_ => _.Name, opt => opt.MapFrom(i => i.Name))
             .ForMember(_ => _.Description, opt => opt.MapFrom(i => i.Description))
@@ -44,6 +50,10 @@ namespace PizzaDeliveryServices.Mapper
             this.CreateMap<PizzaIngredientCreateDTO, PizzaIngredient>()
             .ForMember(_ => _.IngredientID, opt => opt.MapFrom(i => i.IngredientID))
             .ForMember(_ => _.PizzaBaseID, opt => opt.MapFrom(i => i.PizzaBaseID));
+
+            this.CreateMap<PizzaIngredient, PizzaIngredientGetDTO>()
+            .ForMember(_ => _.IngredientId, opt => opt.MapFrom(i => i.IngredientID))
+            .ForMember(_ => _.PizzaBaseId, opt => opt.MapFrom(i => i.PizzaBaseID));
 
             this.CreateMap<PizzaCreateDTO, Pizza>()
             .ForMember(_ => _.PizzaBaseID, opt => opt.MapFrom(i => i.PizzaBaseID))

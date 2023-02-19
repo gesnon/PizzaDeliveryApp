@@ -13,8 +13,8 @@ namespace PizzaDeliveryServices.Services
     {
         public int Create(IngredientCreateDTO DTO);
         public void Update(IngredientUpdateDTO DTO);
-        public void Delete(int Id);
+        public int Delete(int Id);
         public Ingredient Get(int id);
-        public List<IngredientGetDTO> GetIngredientByName(string Name);
+        public List<IngredientGetDTO> GetByName(string Name);
     }
 }

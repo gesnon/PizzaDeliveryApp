@@ -30,5 +30,17 @@ namespace PizzaDeliveryServices.Services
             context.SaveChanges();
         }
 
+        public void GreateAllPizzaIngredients(int PizzaId, List<int> Ingredients)
+        {
+            PizzaIngredientCreateDTO dto = new PizzaIngredientCreateDTO();
+            foreach (int i in Ingredients)
+            {
+                dto.PizzaBaseID = PizzaId;
+                dto.IngredientID = i;
+                PizzaIngredient pizzaIngredient = mapper.Map<PizzaIngredient>(dto);
+                context.PizzaIngredients.Add(pizzaIngredient);
+            }
+            context.SaveChanges();
+        }
     }
 }
