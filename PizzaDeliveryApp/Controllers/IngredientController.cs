@@ -28,8 +28,8 @@ namespace PizzaDeliveryApp.Controllers
             return Ok (ingredientService.Get(Id));
         }
 
-        [HttpGet("GetByName/{Name}")]
-        public ActionResult GetByName(string Name)
+        [HttpGet("GetByName/{Name?}")]
+        public ActionResult GetByName(string? Name=null)
         {
             return Ok(ingredientService.GetByName(Name));
         }
@@ -45,8 +45,7 @@ namespace PizzaDeliveryApp.Controllers
         {
             ingredientService.Update(DTO);
             return Ok();
-        }
-        
+        }        
              
         
     }

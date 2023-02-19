@@ -36,7 +36,7 @@ namespace PizzaDeliveryServices.Services
 
         public PizzaBase Get(int id)
         {
-            PizzaBase pizzaBase = context.pizzaBases.Include(_ => _.PizzaIngredients).FirstOrDefault(x => x.Id == id);
+            PizzaBase pizzaBase = context.pizzaBases.FirstOrDefault(x => x.Id == id);
             
             if (pizzaBase == null)
             {
@@ -47,7 +47,7 @@ namespace PizzaDeliveryServices.Services
 
         public PizzaBaseGetDTO GetDTO(int id)
         {
-            PizzaBase pizzaBase = context.pizzaBases.FirstOrDefault(x => x.Id == id);
+            PizzaBase pizzaBase = context.pizzaBases.Include(_ => _.PizzaIngredients).FirstOrDefault(x => x.Id == id);
 
             if (pizzaBase == null)
             {

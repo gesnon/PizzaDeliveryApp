@@ -67,7 +67,7 @@ namespace PizzaDeliveryServices.Services
             Ingredient result = context.Ingredients.FirstOrDefault(_ => _.Id == id);
             if (result == null)
             {
-                throw new NotFiniteNumberException("Ингридиент не найден");
+                throw new NotFoundExeption("Ингридиент не найден");
             }
             return result;
         }
