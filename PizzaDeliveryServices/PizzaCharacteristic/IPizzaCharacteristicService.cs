@@ -10,5 +10,9 @@ namespace PizzaDeliveryServices.Services
     public interface IPizzaCharacteristicService
     {
         public int Create(CreatePizzaCharacteristicDTO DTO);
+
+        public PizzaCharacteristicDTO Get(int Id);
+
+        public PizzaCharacteristicDTO GetPizzaCharacteristric(int PizzaId);
     }
 }

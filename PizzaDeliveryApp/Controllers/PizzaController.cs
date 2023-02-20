@@ -21,5 +21,11 @@ namespace PizzaDeliveryApp.Controllers
         {
             return Ok(pizzaService.Create(DTO));
         }
+
+        [HttpGet("Id")]
+        public ActionResult Get(int Id)
+        {
+            return Ok(pizzaService.Get(Id));
+        }
     }
 }

@@ -26,5 +26,32 @@ namespace PizzaDeliveryServices.Services
 
             return pizzaCharacteristic.Id;
         }
+
+        public PizzaCharacteristicDTO Get(int Id)
+        {
+            PizzaCharacteristic pizzaCharacteristic = context.PizzaCharacteristic.FirstOrDefault(x => x.Id == Id);
+            if(pizzaCharacteristic == null)
+            {
+                throw new NotFoundExeption("Характеристика не найдена");
+            }
+
+            PizzaCharacteristicDTO result = mapper.Map<PizzaCharacteristicDTO>(pizzaCharacteristic);
+            
+            return result;
+        
+        }
+
+        public PizzaCharacteristicDTO GetPizzaCharacteristric(int PizzaId)
+        {
+            PizzaCharacteristic pizzaCharacteristic = context.Pizzas.FirstOrDefault(x => x.Id == PizzaId).PizzaCharacteristic;
+            if (pizzaCharacteristic == null)
+            {
+                throw new NotFoundExeption("Характеристика не найдена");
+            }
+
+            PizzaCharacteristicDTO result = mapper.Map<PizzaCharacteristicDTO>(pizzaCharacteristic);
+
+            return result;
+        }
     }
 }

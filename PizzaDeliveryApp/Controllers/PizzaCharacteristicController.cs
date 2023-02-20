@@ -19,5 +19,18 @@ namespace PizzaDeliveryApp.Controllers
         {
             return Ok(pizzaCharacteristicService.Create(DTO));
         }
+
+        [HttpGet("{Id}")]
+        public ActionResult Get(int Id)
+        {
+            return Ok(pizzaCharacteristicService.Get(Id));
+        }
+
+        [HttpGet("{PizzaId}")]
+        public ActionResult GetPizzaCharacteristric(int Id)
+        {
+            return Ok(pizzaCharacteristicService.GetPizzaCharacteristric(Id));
+        }
+
     }
 }

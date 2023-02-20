@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using PizzaDeliveryDB;
 using PizzaDeliveryDB.Entities;
 using PizzaDeliveryServices.DTO.PizzaDTO;
@@ -23,11 +24,25 @@ namespace PizzaDeliveryServices.Services
         public int Create(PizzaCreateDTO DTO)
         {
             Pizza pizza = mapper.Map<Pizza>(DTO);
-            
+
             context.Pizzas.Add(pizza);
             context.SaveChanges();
 
             return pizza.Id;
+        }
+
+        public PizzaGetDTO Get(int Id)
+        {
+            Pizza pizza = context.Pizzas.Include(_=>_.PizzaCharacteristic).Include(_=>_.PizzaBase)
+                .ThenInclude(_=>_.PizzaIngredients)
+                .FirstOrDefault(x => x.Id == Id);
+            if (pizza == null)
+            {
+                throw new NotFoundExeption("Пицца не найдена");
+            }
+
+            PizzaGetDTO result = mapper.Map<PizzaGetDTO>(pizza);
+            return result;
         }
         public void Update(PizzaUpdateDTO DTO)
         {
@@ -36,7 +51,7 @@ namespace PizzaDeliveryServices.Services
             {
                 throw new NotFoundExeption("Пицца не найдена");
             }
-            pizza = mapper.Map<Pizza>(DTO);            
+            pizza = mapper.Map<Pizza>(DTO);
 
             context.SaveChanges();
         }
